@@ -29,6 +29,30 @@ cache:
 install:
   - npm install -g bower
 
+env:
+  global:
+    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+    #   via the "travis encrypt" command using the project repo's public key
+    - secure: "OA8vQyLU8moqtSKoAortyKq6u5ioUgJ2bE6pwVkA0U0BRaPl78X9OiqK7Ui6WyfWzF2Yv0yi+xn0T6ROhOrDE4keu2AOy9xwjNsU6NjAKTEWmR/yOTsTKAoXbE5X/WvvVNjrqnKAZFrsgRHvmfYa5Pfnnny3iaMXZDkdSX0dNxq8oWhKip546rPrceX4kKMv3xDfWGo3b3nsMclHgnhlH0WvtJNg/eXoMVoe26PC5hsFwgVHkdwCHJbQdGk0pkUKSZ1ubjHXDFQ3seYasa5NiyObCeFQ4Rsw20LTiQjtbdOrrzgBUO3t5TEbocp/vjt7i53Gn6pLvUxHRYyKvn2XmyfJea4Bdmp17k2Taqxxo95BGTp0vNsdlSusnGn0UqvV+JW88eUldXFmefaNjJg0T/yNei9hmLoYINqW469UNf6r0vmDkzHiw/9d8n6dsbz1LfZLhVF1uKz8Uy4I2Tle4CJ4LiOVQFpuVNzZAWL83G0qwN0irSDfLLz3SMN6KL8a2iBD1lW81akiWPBWi1pGN7yu2BH4B5rT7oqQUYpIi6C5DQ+W3glnRqu4t5BfjMXSsyPSEfpxjpMYmpt51cbBnsi1gfWt1v8NLq4dWVJQrv7/6A51pbNjtvJisDSAQy4C3u4O5mXaaI52Lnd/lcqfokCDXSuZW217afQ47KMks94="
+
+before_install:
+  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+  - echo $COVERITY_SCAN_TOKEN
+  - echo $COVERITY_SCAN_PROJECT_NAME
+  - pwd
+  - env
+  - printenv
+
+addons:
+  coverity_scan:
+    project:
+      name: "toyboxman/griffin"
+      description: "<Your project description here>"
+    notification_email: toyboxman0001@163.com
+    build_command_prepend: "echo $COVERITY_SCAN_TOKEN"
+    build_command: "mvn clean verify -q"
+    branch_pattern: coverity_scan
+
 # keep 30, need change according to ci logs.
 script: travis_wait 30 mvn clean verify -q
 
