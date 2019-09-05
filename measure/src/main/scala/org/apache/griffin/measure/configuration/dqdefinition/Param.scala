@@ -18,6 +18,9 @@ under the License.
 */
 package org.apache.griffin.measure.configuration.dqdefinition
 
+/**
+  * Utility trait for classes that want to validate parameter
+  */
 trait Param extends Serializable {
 
   /**

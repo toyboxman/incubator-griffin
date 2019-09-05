@@ -21,12 +21,24 @@ package org.apache.griffin.measure.step
 import org.apache.griffin.measure.Loggable
 import org.apache.griffin.measure.context.DQContext
 
+/**
+  * Defines an interface about data quality step of processing
+  *
+  * @see org.apache.griffin.measure.step.read.ReadStep
+  * org.apache.griffin.measure.step.write.WriteStep
+  * org.apache.griffin.measure.step.transform.TransformStep
+  * org.apache.griffin.measure.step.SeqDQStep
+  */
 trait DQStep extends Loggable {
 
   val name: String
 
   /**
-    * @return execution success
+    * Execute calculation based on context
+    *
+    * @param context all data for calculation
+    * @return true if this step execution is successful
+    * @see DQContext
     */
   def execute(context: DQContext): Boolean
 
@@ -34,10 +46,14 @@ trait DQStep extends Loggable {
 
 }
 
+/**
+  * Defines a finite set of values specific to the DQStepStatus
+  * [PENDING, RUNNING, COMPLETED, FAILED]
+  */
 object DQStepStatus extends Enumeration {
   val PENDING = Value
   val RUNNING = Value
-  val COMPLETE = Value
+  val COMPLETED = Value
   val FAILED = Value
 }
 

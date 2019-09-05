@@ -24,7 +24,9 @@ import org.apache.griffin.measure.step.DQStep
 import org.apache.griffin.measure.step.read._
 
 /**
-  * build dq step by data source param
+  * A kind of utility trait to build dq step by data source param
+  *
+  * @see DQStepBuilder
   */
 trait DataSourceParamStepBuilder extends DQStepBuilder {
 

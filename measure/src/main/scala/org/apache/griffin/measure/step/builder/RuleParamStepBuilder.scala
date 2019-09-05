@@ -25,7 +25,9 @@ import org.apache.griffin.measure.step.{DQStep, SeqDQStep}
 import org.apache.griffin.measure.step.write.{DataSourceUpdateWriteStep, MetricWriteStep, RecordWriteStep}
 
 /**
-  * build dq step by rule param
+  * A kind of utility trait to build dq step by rule param
+  *
+  * @see DQStepBuilder
   */
 trait RuleParamStepBuilder extends DQStepBuilder {
 

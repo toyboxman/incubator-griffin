@@ -19,9 +19,9 @@ under the License.
 package org.apache.griffin.measure.step.transform
 
 import scala.collection.mutable.HashSet
-import scala.concurrent.duration.Duration
 import scala.concurrent.ExecutionContext
 import scala.concurrent.Future
+import scala.concurrent.duration.Duration
 
 import org.apache.griffin.measure.context.DQContext
 import org.apache.griffin.measure.step.DQStep
@@ -51,7 +51,7 @@ trait TransformStep extends DQStep {
         val result = parentStep.execute(context)
         parentStep.synchronized {
           if (result) {
-            parentStep.status = COMPLETE
+            parentStep.status = COMPLETED
           } else {
             parentStep.status = FAILED
           }
@@ -67,7 +67,7 @@ trait TransformStep extends DQStep {
         Thread.sleep(1000L)
       }
     })
-    val prepared = parentSteps.foldLeft(true)((ret, step) => ret && step.status == COMPLETE)
+    val prepared = parentSteps.foldLeft(true)((ret, step) => ret && step.status == COMPLETED)
     if (prepared) {
       val res = doExecute(context)
       info(threadName + " end transform step : \n" + debugString())

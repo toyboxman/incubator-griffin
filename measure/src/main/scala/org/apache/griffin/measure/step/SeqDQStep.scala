@@ -21,7 +21,9 @@ package org.apache.griffin.measure.step
 import org.apache.griffin.measure.context.DQContext
 
 /**
-  * sequence of dq steps
+  * A sequence of dq steps
+  *
+  * @param dqSteps a Seq contains some DQSteps
   */
 case class SeqDQStep(dqSteps: Seq[DQStep]) extends DQStep {
 
@@ -30,7 +32,7 @@ case class SeqDQStep(dqSteps: Seq[DQStep]) extends DQStep {
   val details: Map[String, Any] = Map()
 
   /**
-    * @return execution success
+    * @inheritdoc
     */
   def execute(context: DQContext): Boolean = {
     dqSteps.foldLeft(true) { (ret, dqStep) =>

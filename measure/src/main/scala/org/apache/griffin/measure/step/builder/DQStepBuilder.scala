@@ -27,7 +27,7 @@ import org.apache.griffin.measure.context.DQContext
 import org.apache.griffin.measure.step._
 
 /**
-  * build dq step by param
+  * Utility trait for classes that want to build dq step by param
   */
 trait DQStepBuilder extends Loggable with Serializable {
 

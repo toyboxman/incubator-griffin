@@ -33,7 +33,6 @@ import org.apache.griffin.measure.job.builder.DQJobBuilder
 import org.apache.griffin.measure.launch.DQApp
 import org.apache.griffin.measure.step.builder.udf.GriffinUDFAgent
 
-
 case class BatchDQApp(allParam: GriffinConfig) extends DQApp {
 
   val envParam: EnvConfig = allParam.getEnvConfig
